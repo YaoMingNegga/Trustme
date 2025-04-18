@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dancing Duck</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+      font-family: 'Courier New', monospace;
+      color: white;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .duck {
+      width: 200px;
+      position: relative;
+      z-index: 2;
+      animation: bounce 1s infinite alternate;
+      display: none;
+    }
+
+    .glow {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(255,255,0,0.3) 0%, transparent 70%);
+      border-radius: 50%;
+      filter: blur(50px);
+      z-index: 1;
+      display: none;
+    }
+
+    .start-text {
+      position: absolute;
+      top: 20px;
+      font-size: 1.5rem;
+      text-shadow: 0 0 4px #ff00ff, 0 0 8px #00ffff;
+      animation: flicker 1s infinite alternate;
+    }
+
+    @keyframes bounce {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-20px); }
+    }
+
+    @keyframes flicker {
+      0% { opacity: 1; }
+      50% { opacity: 0.5; }
+      100% { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="start-text">CLICK ANYWHERE TO START THE PARTY 🎵</div>
+
+  <img src="duck.gif" alt="Dancing Duck" class="duck">
+  <div class="glow"></div>
+
+  <audio id="bg-audio" loop>
+    <source src="song.mp3" type="audio/mpeg" />
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    document.body.addEventListener('click', function () {
+      // Show visuals
+      document.querySelector('.duck').style.display = 'block';
+      document.querySelector('.glow').style.display = 'block';
+      document.querySelector('.start-text').style.display = 'none';
+
+      // Play audio
+      const audio = document.getElementById('bg-audio');
+      audio.play().catch(e => {
+        alert("Browser blocked autoplay. Please try clicking again.");
+        console.log("Autoplay blocked:", e);
+      });
+    }, { once: true });
+  </script>
+</body>
+</html>
