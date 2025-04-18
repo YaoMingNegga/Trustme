@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Audio Test</title>
+</head>
+<body style="background:black; color:white; text-align:center; padding-top:100px; font-family:monospace;">
+
+  <h1>Click to Play Music 🎵</h1>
+
+  <audio id="bg-audio" loop>
+    <source src="song.mp3" type="audio/mpeg">
+    Your browser does not support the audio tag.
+  </audio>
+
+  <script>
+    document.body.addEventListener('click', () => {
+      document.getElementById("bg-audio").play()
+        .then(() => alert("Audio started!"))
+        .catch(err => alert("Audio error: " + err.message));
+    });
+  </script>
+
+</body>
+</html>
